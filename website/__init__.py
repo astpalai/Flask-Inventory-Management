@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import database_exists
 from flask_login import LoginManager
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -25,6 +26,13 @@ def create_app():
         with app.app_context():
             db.create_all()
             print('Database was created')
+            if User.query.filter_by().first() == None:
+                admin = User(email = 'admin@admin.com', username = 'admin', password = generate_password_hash(
+                'pass', method = 'scrypt'))
+                db.session.add(admin)
+                db.session.commit()
+                print('Admin created.')
+                print('Empty')
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
