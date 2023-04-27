@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import database_exists
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 
@@ -15,9 +16,8 @@ def create_app():
     from website.auth import auth
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-
   
-    from website import models
+    from website.models import User
 
     if database_exists('sqlite:///database.db'):
         print('Database already exists')
@@ -25,5 +25,13 @@ def create_app():
         with app.app_context():
             db.create_all()
             print('Database was created')
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
     
     return app
