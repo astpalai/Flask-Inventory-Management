@@ -10,7 +10,7 @@ views = Blueprint('views', __name__)
 def home():
     return render_template('home.html')
 
-@views.route('/inventory', methods = ['GET', 'POST'])
+@views.route('/inventory')
 @login_required
 def inventory():
     if current_user.username != 'admin':
@@ -19,13 +19,3 @@ def inventory():
         
     products = Products.query.filter_by()
     return render_template('inventory.html', products = products)
-
-@views.route('/delete/<int:id>')
-def delete(id):
-    product = Products.query.filter_by(id=id).first()
-    db.session.delete(product)
-    db.session.commit()
-    flash('Product Deleted.', category='warning')
-
-    products = Products.query.filter_by()
-    return redirect(url_for('views.inventory'))

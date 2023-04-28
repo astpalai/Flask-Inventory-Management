@@ -28,9 +28,32 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button class="btn btn-primary" type="submit">Add Product</button>
-
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Modal for editing products -->
+
+<!-- Modal for deleting products -->
+{% for product in products %}
+    <div class="modal fade" id="delete_{{ product.id }}" tabindex="-1" aria-labelledby="delete_product" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-body fs-5">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Warning</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete the following: <br>
+                    {{ product.product }}                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ url_for('mods.delete', id = product.id ) }}" class="btn btn-danger" role="button">Delete</a> 
+                </div>
+             </div>
+        </div>
+    </div>
+{% endfor %}  

@@ -20,4 +20,13 @@ def add():
         flash('Product added!', category='success')
 
     return redirect(url_for('views.inventory'))
+
+@mods.route('/delete/<int:id>')
+def delete(id):
+    product = Products.query.filter_by(id=id).first()
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product Deleted.', category='warning')
+
+    return redirect(url_for('views.inventory'))
     

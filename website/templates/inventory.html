@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    {% for product in products %}
+                    {% for product in products %} 
                         <tr>
                             <td>{{ product.id }}</td>
                             <td>{{ product.product }}</td>
@@ -36,8 +36,9 @@
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#">
                                     Edit
                                 </button>
-                                <a href="{{ url_for('views.delete', id = product.id ) }}" class="btn btn-danger" role="button">Delete</a>
-
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_{{ product.id }}">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     {% endfor %}
