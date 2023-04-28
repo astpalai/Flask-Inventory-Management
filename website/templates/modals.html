@@ -1,0 +1,36 @@
+<!-- Modal for adding products -->
+<div class="modal fade" id="add_product" tabindex="-1" aria-labelledby="add_product" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('mods.add') }}">
+                <div class="modal-header">
+                    <h1 class="modal-title text-body fs-5">Add Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <div class="form-floating text-body-emphasis mb-3">
+                            <input type="product_name" class="form-control" name="product_name" placeholder="Product Name">
+                            <label for="floatingInput">Product Name</label>
+                        </div>
+                        <div class="form-floating text-body-emphasis mb-3">
+                            <input type="price" class="form-control" name="price" placeholder="Price">
+                            <label for="floatingInput">Price</label>
+                        </div>
+                        <div class="form-floating text-body-emphasis mb-3">
+                            <input type="barcode" class="form-control" name="barcode" placeholder="Barcode">
+                            <label for="floatingInput">Barcode</label>
+                        </div>
+                        <div class="form-floating text-body-emphasis mb-3">
+                            <input type="quantity" class="form-control" name="quantity" placeholder="Quantity">
+                            <label for="floatingInput">Quantity</label>
+                        </div>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit">Add Product</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
