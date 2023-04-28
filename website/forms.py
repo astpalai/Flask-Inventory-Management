@@ -4,6 +4,11 @@ from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationE
 
 from website.models import User
 
+class LoginForm(FlaskForm):        
+    username = StringField(label='Username:', validators=[DataRequired()])
+    password = PasswordField(label='Password:', validators=[DataRequired()])
+    submit = SubmitField(label='Log in')
+
 class RegisterForm(FlaskForm):
     def validate_username(self, username_to_check):
         user = User.query.filter_by(username=username_to_check.data).first()
