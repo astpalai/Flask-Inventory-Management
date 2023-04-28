@@ -15,8 +15,10 @@ def create_app():
 
     from website.views import views
     from website.auth import auth
+    from website.mods import mods
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(mods, url_prefix='/')
   
     from website.models import User
 

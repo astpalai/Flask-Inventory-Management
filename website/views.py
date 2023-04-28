@@ -16,16 +16,6 @@ def inventory():
     if current_user.username != 'admin':
         flash('Access Denied', category = 'danger')
         return redirect(url_for('views.home'))
-    
-    if request.method == 'POST':
-        product_name = request.form.get('product_name')
-        price = request.form.get('price')
-        barcode = request.form.get('barcode')
-        quantity = request.form.get('quantity')
-        new_product = Products(product = product_name, price = price, barcode = barcode, quantity = quantity)
-        db.session.add(new_product)
-        db.session.commit()
-        flash('Product added!', category='success')
         
     products = Products.query.filter_by()
     return render_template('inventory.html', products = products)
