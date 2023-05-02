@@ -28,14 +28,12 @@ class RegisterForm(FlaskForm):
 
 class AddProductForm(FlaskForm):
     def validate_barcode(self, barcode_to_check):
-        if Length(barcode_to_check) != 6:
-            raise ValidationError('Barcode must be six characters')
         barcode = Products.query.filter_by(barcode = barcode_to_check.data).first()
         if barcode:
             raise ValidationError('Barcode already exists!')
 
     product_name = StringField(label = 'Product Name', validators=[DataRequired()])
     price = StringField(label = 'Price', validators=[DataRequired()])
-    barcode = StringField(label = 'Barcode', validators=[DataRequired(), Length(6)]) #length 8
+    barcode = StringField(label = 'Barcode', validators=[DataRequired(), Length(min=6, max=6)])
     quantity = StringField(label = 'Quantity', validators=[DataRequired()])
     submit = SubmitField(label = 'Add product')
