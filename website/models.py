@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
 
 class Products(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    product = db.Column(db.String(30), nullable = False)
+    product_name = db.Column(db.String(30), nullable = False)
     price = db.Column(db.Integer, nullable = False)
     barcode = db.Column(db.Integer, nullable = False)
     quantity = db.Column(db.Integer, nullable = False)
