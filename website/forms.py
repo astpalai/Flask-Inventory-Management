@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, HiddenField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 
-from website.models import User
+from website.models import User, Products
 
 class LoginForm(FlaskForm):        
     username = StringField(label = 'Username', validators=[DataRequired()])
@@ -27,6 +27,13 @@ class RegisterForm(FlaskForm):
     submit = SubmitField(label = 'Create Account')
 
 class AddProductForm(FlaskForm):
+    def validate_barcode(self, barcode_to_check):
+        if Length(barcode_to_check) != 6:
+            raise ValidationError('Barcode must be six characters')
+        barcode = Products.query.filter_by(barcode = barcode_to_check.data).first()
+        if barcode:
+            raise ValidationError('Barcode already exists!')
+
     product_name = StringField(label = 'Product Name', validators=[DataRequired()])
     price = StringField(label = 'Price', validators=[DataRequired()])
     barcode = StringField(label = 'Barcode', validators=[DataRequired(), Length(6)]) #length 8

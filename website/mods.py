@@ -17,7 +17,10 @@ def add():
         db.session.add(product)
         db.session.commit()
         flash('Product added successfully.', category='success')
-        return redirect(url_for('views.inventory'))
+    if add_form.errors != {}: #If there are not errors from the validations
+        for err_msg in add_form.errors.values():
+            flash(*err_msg, category='danger')
+    return redirect(url_for('views.inventory'))
 
 @mods.route('/delete/<int:id>')
 def delete(id):
