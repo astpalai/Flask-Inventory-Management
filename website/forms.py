@@ -37,3 +37,10 @@ class AddProductForm(FlaskForm):
     barcode = StringField(label = 'Barcode', validators=[DataRequired(), Length(min=6, max=6)])
     quantity = StringField(label = 'Quantity', validators=[DataRequired()])
     submit = SubmitField(label = 'Add product')
+
+class EditProductForm(FlaskForm):
+    product_name = StringField(label = 'Product Name', validators=[DataRequired()])
+    price = StringField(label = 'Price', validators=[DataRequired()])
+    barcode = HiddenField()
+    quantity = StringField(label = 'Quantity', validators=[DataRequired()])
+    submit = SubmitField(label = 'Add product')

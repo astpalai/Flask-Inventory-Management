@@ -36,6 +36,43 @@
 </div>
 
 <!-- Modal for editing products -->
+{% for product in products %}
+<div class="modal fade" id="edit_{{ product.id }}" tabindex="-1" aria-labelledby="edit_product" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-body fs-5">Edit Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url_for('mods.edit', id = product.id) }}" method="POST">
+                {{ edit_form.hidden_tag() }}
+                <div class="modal-body">
+                        <div class="form-floating text-body-emphasis mb-3">
+                            {{ edit_form.product_name(class="form-control", placeholder="Product Name", value = product.product_name) }}
+                            <label for="floatingInput">Product Name</label>
+                        </div>
+                        <div class="form-floating text-body-emphasis mb-3">
+                            {{ edit_form.price(class="form-control", placeholder="Price", value = product.price) }}
+                            <label for="floatingInput">Price</label>
+                        </div>
+                        <div class="form-floating text-body-emphasis mb-3">
+                            {{ edit_form.barcode(class="form-control", placeholder="Barcode", value = product.barcode) }}
+                            <label for="floatingInput">Barcode</label>
+                        </div>
+                        <div class="form-floating text-body-emphasis mb-3">
+                            {{ edit_form.quantity(class="form-control", placeholder="Quantity", value = product.quantity) }}
+                            <label for="floatingInput">Quantity</label>
+                        </div>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{ edit_form.submit(class="btn btn-warning", value="Edit Product") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
 
 <!-- Modal for deleting products -->
 {% for product in products %}
@@ -57,4 +94,4 @@
              </div>
         </div>
     </div>
-{% endfor %}  
+{% endfor %}

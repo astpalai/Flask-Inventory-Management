@@ -29,11 +29,11 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>{{ product.product_name }}</td>
-                            <td>$ {{ product.price }}</td>
+                            <td>${{ product.price }}</td>
                             <td>{{ product.barcode }}</td>
                             <td>{{ product.quantity }}</td>
                             <td>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#">
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit_{{ product.id }}">
                                     Edit
                                 </button>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_{{ product.id }}">

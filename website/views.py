@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 
 from website import db
 from website.models import Products
-from website.forms import AddProductForm
+from website.forms import AddProductForm, EditProductForm
 
 views = Blueprint('views', __name__)
 
@@ -18,6 +18,7 @@ def inventory():
         flash('Access Denied', category = 'danger')
         return redirect(url_for('views.home'))
     
-    add_form = AddProductForm()        
+    add_form = AddProductForm() 
+    edit_form = EditProductForm()       
     products = Products.query.filter_by()
-    return render_template('inventory.html', products = products, add_form = add_form)
+    return render_template('inventory.html', products = products, add_form = add_form, edit_form = edit_form)
