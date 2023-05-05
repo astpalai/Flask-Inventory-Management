@@ -22,3 +22,9 @@ def inventory():
     edit_form = EditProductForm()       
     products = Products.query.filter_by()
     return render_template('inventory.html', products = products, add_form = add_form, edit_form = edit_form)
+
+@views.route('/market')
+@login_required
+def market():
+    products = Products.query.filter_by()
+    return render_template('market.html', products = products)

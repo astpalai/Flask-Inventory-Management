@@ -5,4 +5,23 @@
 {% endblock %}
 
 {% block content %}
+<div class="position-relative overflow-hidden p-2 p-md-1 m-md-1 text-center bg-dark" style="color:white">
+    <div class="col-md-5 p-lg-2 mx-auto my-5">
+        {% if current_user.is_authenticated %}
+            <h1 class="display-6 font-weight-normal">
+                Welcome to the Market App, {{ current_user.username }}
+            </h1>
+        {% else %}
+            <h1 class="display-6 font-weight-normal">
+                Welcome to the Market App
+            </h1>        
+            <br><br>
+            <p class="lead font-weight-normal">Are you a new user?</p>
+            <a class="btn btn-primary" href="{{ url_for('auth.register') }}">Register</a>
+            <br><br>
+            <p class="lead font-weight-normal">Do you already have an account?</p>
+            <a class="btn btn-primary" href="{{ url_for('auth.login') }}">Login</a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

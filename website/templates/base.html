@@ -18,20 +18,26 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
-                    {% if current_user.username == 'admin' %}
+                    {% if current_user.is_authenticated %}
                         <ul class="navbar-nav">
-                            <a class="nav-link" href="{{url_for('views.inventory')}}">Inventory</a>
+                            <a class="nav-link" href="{{url_for('views.market')}}">Market</a>
                         </ul>
-                    {% endif %}
-                    <ul class="navbar-nav ms-auto">
-                        {% if current_user.is_authenticated %}
+                        {% if current_user.username == 'admin' %}
+                            <ul class="navbar-nav">
+                                <a class="nav-link" href="{{url_for('views.inventory')}}">Inventory</a>
+                            </ul>
+                        {% endif %}
+                        <ul class="navbar-nav ms-auto">                        
                             <a class="nav-link">Welcome, {{ current_user.username }}</a>
                             <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                        {% else %}
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav ms-auto"> 
                             <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                             <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-                        {% endif %}
-                    </ul>
+                        </ul>
+                        
+                    {% endif %}                    
                 </div>
             </div>
         </nav>
