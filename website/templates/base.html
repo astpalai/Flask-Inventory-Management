@@ -27,7 +27,11 @@
                                 <a class="nav-link" href="{{url_for('views.inventory')}}">Inventory</a>
                             </ul>
                         {% endif %}
-                        <ul class="navbar-nav ms-auto">                        
+                        <ul class="navbar-nav ms-auto">
+                            <a class="nav-link" style="color: green; font-weight: bold">
+                                <i class="fas fa-coins"></i>
+                                ${{ current_user.budget }}
+                            </a>
                             <a class="nav-link">Welcome, {{ current_user.username }}</a>
                             <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                         </ul>
