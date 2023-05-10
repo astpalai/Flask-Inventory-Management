@@ -1,97 +1,127 @@
-<!-- Modal for adding products -->
-<div class="modal fade" id="add_product" tabindex="-1" aria-labelledby="add_product" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title text-body fs-5">Add Product</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ url_for('mods.add') }}" method="POST">
-                {{ add_form.hidden_tag() }}
-                <div class="modal-body">
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ add_form.product_name(class="form-control", placeholder="Product Name") }}
-                            <label for="floatingInput">Product Name</label>
-                        </div>
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ add_form.price(class="form-control", placeholder="Price") }}
-                            <label for="floatingInput">Price</label>
-                        </div>
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ add_form.barcode(class="form-control", placeholder="Barcode") }}
-                            <label for="floatingInput">Barcode</label>
-                        </div>
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ add_form.quantity(class="form-control", placeholder="Quantity") }}
-                            <label for="floatingInput">Quantity</label>
-                        </div>                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    {{ add_form.submit(class="btn btn-primary") }}
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for editing products -->
-{% for product in products %}
-<div class="modal fade" id="edit_{{ product.id }}" tabindex="-1" aria-labelledby="edit_product" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title text-body fs-5">Edit Product</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ url_for('mods.edit', id = product.id) }}" method="POST">
-                {{ edit_form.hidden_tag() }}
-                <div class="modal-body">
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ edit_form.product_name(class="form-control", placeholder="Product Name", value = product.product_name) }}
-                            <label for="floatingInput">Product Name</label>
-                        </div>
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ edit_form.price(class="form-control", placeholder="Price", value = product.price) }}
-                            <label for="floatingInput">Price</label>
-                        </div>
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ edit_form.barcode(class="form-control", placeholder="Barcode", value = product.barcode) }}
-                            <label for="floatingInput">Barcode</label>
-                        </div>
-                        <div class="form-floating text-body-emphasis mb-3">
-                            {{ edit_form.quantity(class="form-control", placeholder="Quantity", value = product.quantity) }}
-                            <label for="floatingInput">Quantity</label>
-                        </div>                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    {{ edit_form.submit(class="btn btn-warning", value="Edit Product") }}
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-{% endfor %}
-
-<!-- Modal for deleting products -->
-{% for product in products %}
-    <div class="modal fade" id="delete_{{ product.id }}" tabindex="-1" aria-labelledby="delete_product" aria-hidden="true">
+{% if request.path == url_for('views.inventory') %}
+    <!-- Modal for adding products -->
+    <div class="modal fade" id="add_product" tabindex="-1" aria-labelledby="add_product" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content text-body fs-5">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">Warning</h1>
+                    <h1 class="modal-title text-body fs-5">Add Product</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    Are you sure you want to delete the following: <br>
-                    {{ product.product }}                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{{ url_for('mods.delete', id = product.id ) }}" class="btn btn-danger" role="button">Delete</a> 
-                </div>
-             </div>
+                <form action="{{ url_for('mods.add') }}" method="POST">
+                    {{ add_form.hidden_tag() }}
+                    <div class="modal-body">
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ add_form.product_name(class="form-control", placeholder="Product Name") }}
+                                <label for="floatingInput">Product Name</label>
+                            </div>
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ add_form.price(class="form-control", placeholder="Price") }}
+                                <label for="floatingInput">Price</label>
+                            </div>
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ add_form.barcode(class="form-control", placeholder="Barcode") }}
+                                <label for="floatingInput">Barcode</label>
+                            </div>
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ add_form.quantity(class="form-control", placeholder="Quantity") }}
+                                <label for="floatingInput">Quantity</label>
+                            </div>                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        {{ add_form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-{% endfor %}
+
+    <!-- Modal for editing products -->
+    {% for product in products %}
+    <div class="modal fade" id="edit_{{ product.id }}" tabindex="-1" aria-labelledby="edit_product" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-body fs-5">Edit Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ url_for('mods.edit', id = product.id) }}" method="POST">
+                    {{ edit_form.hidden_tag() }}
+                    <div class="modal-body">
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ edit_form.product_name(class="form-control", placeholder="Product Name", value = product.product_name) }}
+                                <label for="floatingInput">Product Name</label>
+                            </div>
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ edit_form.price(class="form-control", placeholder="Price", value = product.price) }}
+                                <label for="floatingInput">Price</label>
+                            </div>
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ edit_form.barcode(class="form-control", placeholder="Barcode", value = product.barcode) }}
+                                <label for="floatingInput">Barcode</label>
+                            </div>
+                            <div class="form-floating text-body-emphasis mb-3">
+                                {{ edit_form.quantity(class="form-control", placeholder="Quantity", value = product.quantity) }}
+                                <label for="floatingInput">Quantity</label>
+                            </div>                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        {{ edit_form.submit(class="btn btn-warning", value="Edit Product") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Modal for deleting products -->
+    {% for product in products %}
+        <div class="modal fade" id="delete_{{ product.id }}" tabindex="-1" aria-labelledby="delete_product" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content text-body fs-5">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="exampleModalLabel">Warning</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the following: <br>
+                        {{ product.product }}                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="{{ url_for('mods.delete', id = product.id ) }}" class="btn btn-danger" role="button">Delete</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<!-- Modal for adding funds -->
+<div class="modal fade" id="add_funds" tabindex="-1" aria-labelledby="add_funds" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-body-emphasis mb-3">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Add Funds</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Your current balance: ${{ current_user.budget }}
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="add_funds_box" class="col-form-label">Amount to add:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" inputmode="numeric" id="add_funds_box" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add funds</button>
+            </div>
+        </div>
+    </div>
+</div>
+  

@@ -11,6 +11,7 @@
     </head>
 
     <body class="bg-dark">
+        {% include 'modals.html' %}
         <nav class="navbar navbar-expand-sm bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url_for('views.home') }}">Home</a>
@@ -32,7 +33,16 @@
                                 <i class="fas fa-coins"></i>
                                 ${{ current_user.budget }}
                             </a>
-                            <a class="nav-link">Welcome, {{ current_user.username }}</a>
+                            <div class="dropdown">
+                                <a class="nav-link" type="button" data-bs-toggle="dropdown">
+                                    Welcome, {{ current_user.username }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add_funds">
+                                        Add funds
+                                    </a>
+                                </ul>
+                            </div>                            
                             <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                         </ul>
                     {% else %}

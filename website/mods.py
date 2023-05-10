@@ -41,6 +41,7 @@ def edit(id):
     return redirect(url_for('views.inventory'))
 
 @mods.route('/delete/<int:id>')
+@login_required
 def delete(id):
     product = Products.query.filter_by(id=id).first()
     db.session.delete(product)
