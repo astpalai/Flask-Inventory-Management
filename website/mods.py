@@ -49,4 +49,16 @@ def delete(id):
     flash('Product Deleted.', category='warning')
 
     return redirect(url_for('views.inventory'))
-    
+
+@mods.route('/add_funds', methods = ['GET', 'POST'])
+@login_required
+def add_funds():
+    if request.method == 'POST':
+        new_balance = int(request.form.get('add_funds_box'))
+        if int(new_balance)<0:
+            flash('You must insert a positive amount.', category='warning')
+        else:
+            current_user.budget+= new_balance
+            db.session.commit()
+            flash('Funds added successfully.', category='success')
+    return redirect(url_for('views.market'))

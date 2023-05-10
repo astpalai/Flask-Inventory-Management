@@ -29,7 +29,7 @@
                             </ul>
                         {% endif %}
                         <ul class="navbar-nav ms-auto">
-                            <a class="nav-link" style="color: green; font-weight: bold">
+                            <a class="nav-link fw-bold text-success">
                                 <i class="fas fa-coins"></i>
                                 ${{ current_user.budget }}
                             </a>
@@ -38,7 +38,7 @@
                                     Welcome, {{ current_user.username }}
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add_funds">
+                                    <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#add_funds">
                                         Add funds
                                     </a>
                                 </ul>

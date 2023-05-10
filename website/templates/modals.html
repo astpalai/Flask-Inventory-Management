@@ -106,22 +106,33 @@
                 <h1 class="modal-title fs-5">Add Funds</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Your current balance: ${{ current_user.budget }}
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                        <label for="add_funds_box" class="col-form-label">Amount to add:</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="text" inputmode="numeric" id="add_funds_box" class="form-control">
+            <form action="{{ url_for('mods.add_funds') }}" method="POST">
+                <div class="modal-body">
+                    Your current balance: ${{ current_user.budget }}
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="add_funds_box" class="col-form-label">Amount to add:</label>
+                        </div>
+                        <div class="col-auto form-outline" style="width: 22rem;">
+                            <input type="number" name="add_funds_box" class="form-control"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add funds</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add funds</button>
+                </div>
+            </form>
         </div>
     </div>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+               -webkit-appearance: none;
+                margin: 0;
+            } 
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </div>
-  
